@@ -13,14 +13,6 @@ use Symfony\Component\Routing\Attribute\Route;
 #[Route('/voiture')]
 final class VoitureController extends AbstractController
 {
-    #[Route('', name: 'app_voiture')]
-    public function index(): Response
-    {
-        return $this->render('voiture/index.html.twig', [
-            'controller_name' => 'VoitureController',
-        ]);
-    }
-
     #[Route('/new', name: 'app_voiture_new', methods: ['GET', 'POST'])]
     public function new(Request $request, EntityManagerInterface $manager): Response
     {
@@ -37,6 +29,15 @@ final class VoitureController extends AbstractController
         return $this->render('voiture/new.html.twig', [
             'controller_name' => 'VoitureController',
             'form' => $form,
+        ]);
+    }
+
+    #[Route('/{id}', name: 'app_voiture_show', requirements: ['id' => '\d+'], methods: ['GET'])]
+    public function show(?Voiture $voiture): Response
+    {
+        return $this->render('voiture/show.html.twig', [
+            'controller_name' => 'VoitureController',
+            'voiture' => $voiture,
         ]);
     }
 }
