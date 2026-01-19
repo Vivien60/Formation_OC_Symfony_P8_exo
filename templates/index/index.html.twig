@@ -2,6 +2,19 @@
 
 {% block title %}Flotte{% endblock %}
 
+{% block header %}
+    {{ block('header', 'base.html.twig') }}
+    <div class="flex-header">
+        <div>
+            <h1>Location de voitures à Saint-Étienne</h1>
+            <p>Un service de location de voitures au mois pour répondre à vos besoins de mobilité.</p>
+        </div>
+        <div>
+            <img src="{{ asset('img/car.png') }}" alt="Voiture">
+        </div>
+    </div>
+{% endblock %}
+
 {% block content %}
     <section id="fleet">
         <h2>Découvrez la flotte de véhicules chez Véhicloc</h2>
