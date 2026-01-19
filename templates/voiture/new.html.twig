@@ -1,0 +1,40 @@
+{% extends 'base.html.twig' %}
+
+{% block content %}
+<section id="add">
+    <a href="/">← Retour</a>
+    <h1>Ajouter une voiture</h1>
+    {{ form_start(form) }}
+        <div class="input">
+            {{ form_row(form.nom, {label: 'Nom/Modele de la voiture'}) }}
+        </div>
+        <div class="input">
+            {{ form_row(form.description, {label: 'Description'}) }}
+        </div>
+        <div class="flex-input">
+            <div class="input">
+                {{ form_row(form.prixParMois, {label: 'Prix mensuel'}) }}
+            </div>
+            <div class="input">
+                {{ form_row(form.prixParJour, {label: 'Prix journalier'}) }}
+            </div>
+        </div>
+        <div class="flex-input">
+            <div class="input">
+                {% do form.nbPlaces.setRendered() %}
+                <label for="places">Nombre de places</label>
+                <select id="places" name="{{ form.nbPlaces.vars.full_name }}">
+                    {% for i in 1..9 %}
+                        <option value="{{ i }}" {{ form.nbPlaces.vars.value == i ? 'selected' }}>{{ i }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            <div class="input">
+                {{ form_row(form.typeTransmission, {label: 'Boîte de vitesse'}) }}
+            </div>
+        </div>
+
+        <button class="btn-add">Ajouter</button>
+    {{ form_end(form) }}
+</section>
+{% endblock %}
