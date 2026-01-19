@@ -6,6 +6,7 @@ use App\Enum\VoitureTypeTransmission;
 use App\Repository\VoitureRepository;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: VoitureRepository::class)]
 class Voiture
@@ -15,22 +16,23 @@ class Voiture
     #[ORM\Column]
     private ?int $id = null;
 
-    #[ORM\Column(length: 255)]
+    #[ORM\Column(length: 255, nullable: false)]
     private ?string $nom = null;
 
     #[ORM\Column(type: Types::TEXT, nullable: true)]
     private ?string $description = null;
 
-    #[ORM\Column(length: 255)]
+    #[ORM\Column(length: 255, nullable: false)]
+    #[Assert\NotBlank]
     private ?VoitureTypeTransmission $typeTransmission = null;
 
-    #[ORM\Column]
+    #[ORM\Column(type: Types::FLOAT, nullable: false)]
     private ?float $prixParJour = null;
 
-    #[ORM\Column]
+    #[ORM\Column(type: Types::FLOAT, nullable: false)]
     private ?float $prixParMois = null;
 
-    #[ORM\Column(nullable: true)]
+    #[ORM\Column(type: Types::INTEGER, nullable: true)]
     private ?int $nbPlaces = null;
 
     public function getId(): ?int

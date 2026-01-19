@@ -24,7 +24,7 @@ final class VoitureController extends AbstractController
             $manager->persist($voiture);
             $manager->flush();
 
-            return $this->redirectToRoute('app_index');
+            return $this->redirectToRoute('app_voiture_show', ['id' => $voiture->getId()], Response::HTTP_SEE_OTHER);
         }
         return $this->render('voiture/new.html.twig', [
             'controller_name' => 'VoitureController',
@@ -35,6 +35,9 @@ final class VoitureController extends AbstractController
     #[Route('/{id}', name: 'app_voiture_show', requirements: ['id' => '\d+'], methods: ['GET'])]
     public function show(?Voiture $voiture): Response
     {
+        if (!$voiture) {
+            return $this->redirectToRoute('app_index', [], Response::HTTP_SEE_OTHER);
+        }
         return $this->render('voiture/show.html.twig', [
             'controller_name' => 'VoitureController',
             'voiture' => $voiture,
