@@ -32,6 +32,16 @@ final class VoitureController extends AbstractController
         ]);
     }
 
+    #[Route('/{id}/delete', name: 'app_voiture_delete', requirements: ['id' => '\d+'], methods: ['GET'])]
+    public function delete(?Voiture $voiture, EntityManagerInterface $manager): Response
+    {
+        if($voiture) {
+            $manager->remove($voiture);
+            $manager->flush();
+        }
+        return $this->redirectToRoute('app_index', [], Response::HTTP_SEE_OTHER);
+    }
+
     #[Route('/{id}', name: 'app_voiture_show', requirements: ['id' => '\d+'], methods: ['GET'])]
     public function show(?Voiture $voiture): Response
     {
