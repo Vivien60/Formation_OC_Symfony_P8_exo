@@ -18,3 +18,5 @@
 /public/assets/
 /assets/vendor/
 ###< symfony/asset-mapper ###
+/.idea/Formation_OC_Symfony_P8_Symfony_exo.iml
+/.idea/commandlinetools/schemas/frameworkDescriptionVersion1.1.4.xsd
